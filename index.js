@@ -15,14 +15,6 @@ module.exports =  class MyPlugin extends Plugin {
       })
     })
   }
-  
-  testMethods () {
-    // this.project.toast({message: `Test from ${this.project.path}`})
-    // this.project.snackBar({message: `Test from ${this.project.path}`})
-    // this.project.copyToClipboard('yep', 'ok')
-    // this.project.openUrl('https://imdone.io')
-    // this.project.openPath(path.join(this.project.path, '.imdone', 'config.yml'))
-  }
 
   onListsChange (lists) {
     this.strikeOutCompletedItems(lists)
