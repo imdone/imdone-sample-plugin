@@ -1,9 +1,11 @@
-const Plugin = require('imdone-api')
+'use strict';
 
-module.exports =  class MyPlugin extends Plugin {
+const Plugin = require('imdone-api');
+
+class MyPlugin extends Plugin {
   
   constructor (project) {
-    super(project)
+    super(project);
   }
   
   strikeOutCompletedItems (lists) {
@@ -11,51 +13,51 @@ module.exports =  class MyPlugin extends Plugin {
       list.tasks.forEach(task => {
         task.interpretedContent = task.interpretedContent.replace(/- \[x\] (.*)$/gm, (match, p1) => {
           return `- [x] ~~${p1}~~`
-        })
-      })
-    })
+        });
+      });
+    });
   }
 
   onListsChange (lists) {
-    this.strikeOutCompletedItems(lists)
+    this.strikeOutCompletedItems(lists);
   }
 
   getBoardActions () {
-    const project = this.project
+    const project = this.project;
     return [
       {
         name: 'Filter for urgent cards',
         action: () => {
-          project.setFilter('allTags=urget')
+          project.setFilter('allTags=urget');
         }
       },
       {
         name: 'Add a card in TODO',
         action: () => {
-          project.newCard({ list: 'TODO'})
+          project.newCard({ list: 'TODO'});
         }
       },
       {
         name: 'Test snackBar',
         action: () => {
-          project.snackBar({message:'Testing snackBar'})
+          project.snackBar({message:'Testing snackBar'});
         }
       },
       {
         name: 'Test toast',
         action: () => {
-          project.toast({message:'Testing toast'})
+          project.toast({message:'Testing toast'});
         }
       }
     ]
   }
 
   getCardLinks (task) {
-    const project = this.project
+    this.project;
     return [
       {
         action: () => {
-          console.log('Active Task:',task)
+          console.log('Active Task:',task);
         },
         icon: 'rocket',
         pack: 'fas',
@@ -63,7 +65,7 @@ module.exports =  class MyPlugin extends Plugin {
       },
       {
         action: () => {
-          this.project.addMetadata(task, 'metadata', 'value')
+          this.project.addMetadata(task, 'metadata', 'value');
         },
         icon: 'table',
         pack: 'fas',
@@ -71,7 +73,7 @@ module.exports =  class MyPlugin extends Plugin {
       },
       {
         action: () => {
-          this.project.addTag(task, 'tag')
+          this.project.addTag(task, 'tag');
         },
         icon: 'tag',
         pack: 'fas',
@@ -79,7 +81,7 @@ module.exports =  class MyPlugin extends Plugin {
       },
       {
         action: () => {
-          this.project.copyToClipboard(task.data.markdown, "Markdown copied to clipboard!")
+          this.project.copyToClipboard(task.data.markdown, "Markdown copied to clipboard!");
         },
         icon: 'markdown',
         pack: 'fab',
@@ -87,7 +89,7 @@ module.exports =  class MyPlugin extends Plugin {
       },
       {
         action: () => {
-          this.project.copyToClipboard(task.data.html, "HTML copied to clipboard!")
+          this.project.copyToClipboard(task.data.html, "HTML copied to clipboard!");
         },
         icon: 'copy',
         pack: 'fas',
@@ -102,51 +104,53 @@ module.exports =  class MyPlugin extends Plugin {
       source,
       line,
       totals
-    } = task
+    } = task;
     return {
       date: (new Date()).toDateString(),
       time: (new Date()).toLocaleTimeString(),
       timestamp: (new Date()).toISOString(),
       sourceLink: source && `[${source.path}:${line}](${source.path}:${line})`,
       dueEmoji: (() => {
-        const due = totals["What's Due?"]
-        let emoji = ':2nd_place_medal:'
+        const due = totals["What's Due?"];
+        let emoji = ':2nd_place_medal:';
         if (due >= 3) {
-          emoji = ':fire:'
+          emoji = ':fire:';
         } else if (due === 0) {
-          emoji = ':rocket:'
+          emoji = ':rocket:';
         }
         return `<span style="font-size: 1.5em;">${emoji}</span>`
       })(),
       recentEmoji: (() => {
-        const recentlyCompleted = totals["Recently Completed"]
-        let emoji = ':2nd_place_medal:'
+        const recentlyCompleted = totals["Recently Completed"];
+        let emoji = ':2nd_place_medal:';
         if (recentlyCompleted >= 3) {
-          emoji = ':rocket:'
+          emoji = ':rocket:';
         } else if (recentlyCompleted === 0) {
-          emoji = ':fire:'
+          emoji = ':fire:';
         }
         return `<span style="font-size: 1.5em;">${emoji}</span>`
       })(),
       wipEmoji: (() => {
-        const doing = totals["DOING"]
-        let emoji = ':2nd_place_medal:'
+        const doing = totals["DOING"];
+        let emoji = ':2nd_place_medal:';
         if (doing >= 3) {
-          emoji = ':fire:'
+          emoji = ':fire:';
         } else if (doing === 0) {
-          emoji = ':sleeping:'
+          emoji = ':sleeping:';
         } else if (doing === 1) {
-          emoji = ':rocket:'
+          emoji = ':rocket:';
         }
         return `<span style="font-size: 1.5em;">${emoji}</span>`
       })(),
       cardTotal: (() => {
-        let count = 0
+        let count = 0;
         Object.keys(totals).forEach(list => {
-          count += totals[list]
-        })
+          count += totals[list];
+        });
         return count
       })()
     }
   }
 }
+
+module.exports = MyPlugin;

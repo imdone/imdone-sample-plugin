@@ -1,14 +1,17 @@
 {
-  "name": "imdone-sample-pluginn",
+  "name": "imdone-sample-plugin",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bundle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c rollup.config.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "imdone-api": "^0.0.9"
+  },
+  "devDependencies": {
+    "rollup": "^2.62.0"
   }
 }
