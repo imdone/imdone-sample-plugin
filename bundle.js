@@ -81,7 +81,7 @@ class MyPlugin extends Plugin {
       },
       {
         action: () => {
-          this.project.copyToClipboard(task.data.markdown, "Markdown copied to clipboard!");
+          this.project.copyToClipboard(task.data.rawMarkdown, "Markdown copied to clipboard!");
         },
         icon: 'markdown',
         pack: 'fab',
