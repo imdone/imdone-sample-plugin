@@ -59,7 +59,7 @@ export default class MyPlugin extends Plugin {
         },
         icon: 'rocket',
         pack: 'fas',
-        title: `Write task to console.`
+        title: `Write task to console`
       },
       {
         action: () => {
@@ -83,7 +83,7 @@ export default class MyPlugin extends Plugin {
         },
         icon: 'markdown',
         pack: 'fab',
-        title: 'Copy markdown to clipboard'
+        title: 'Copy markdown'
       },
       {
         action: () => {
@@ -91,7 +91,7 @@ export default class MyPlugin extends Plugin {
         },
         icon: 'copy',
         pack: 'fas',
-        title: 'Copy html to clipboard'
+        title: 'Copy html'
       }
 
     ]
