@@ -1,25 +1,21 @@
 'use strict';
 
-const Plugin = require('imdone-api');
+var Plugin = require('imdone-api');
 
-class MyPlugin extends Plugin {
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Plugin__default = /*#__PURE__*/_interopDefaultLegacy(Plugin);
+
+class SamplePlugin extends Plugin__default["default"] {
   
   constructor (project) {
     super(project);
   }
   
-  strikeOutCompletedItems (lists) {
-    lists.forEach(list => {
-      list.tasks.forEach(task => {
-        task.interpretedContent = task.interpretedContent.replace(/- \[x\] (.*)$/gm, (match, p1) => {
-          return `- [x] ~~${p1}~~`
-        });
-      });
+  onTaskUpdate (task) {
+    task.interpretedContent = task.interpretedContent.replace(/- \[x\] (.*)$/gm, (match, p1) => {
+      return `- [x] ~~${p1}~~`
     });
-  }
-
-  onListsChange (lists) {
-    this.strikeOutCompletedItems(lists);
   }
 
   getBoardActions () {
@@ -153,4 +149,4 @@ class MyPlugin extends Plugin {
   }
 }
 
-module.exports = MyPlugin;
+module.exports = SamplePlugin;

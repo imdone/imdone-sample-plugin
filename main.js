@@ -1,23 +1,15 @@
-const Plugin = require('imdone-api')
+import Plugin from 'imdone-api'
 
-export default class MyPlugin extends Plugin {
+export default class SamplePlugin extends Plugin {
   
   constructor (project) {
     super(project)
   }
   
-  strikeOutCompletedItems (lists) {
-    lists.forEach(list => {
-      list.tasks.forEach(task => {
-        task.interpretedContent = task.interpretedContent.replace(/- \[x\] (.*)$/gm, (match, p1) => {
-          return `- [x] ~~${p1}~~`
-        })
-      })
+  onTaskUpdate (task) {
+    task.interpretedContent = task.interpretedContent.replace(/- \[x\] (.*)$/gm, (match, p1) => {
+      return `- [x] ~~${p1}~~`
     })
-  }
-
-  onListsChange (lists) {
-    this.strikeOutCompletedItems(lists)
   }
 
   getBoardActions () {
