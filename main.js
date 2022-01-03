@@ -63,11 +63,11 @@ export default class SamplePlugin extends Plugin {
       },
       {
         action: () => {
-          this.project.addTag(task, 'tag')
+          this.project.addTag(task, 'urgent')
         },
         icon: 'tag',
         pack: 'fas',
-        title: 'Add tag'
+        title: 'Add urgent tag'
       },
       {
         action: () => {
@@ -99,46 +99,7 @@ export default class SamplePlugin extends Plugin {
       date: (new Date()).toDateString(),
       time: (new Date()).toLocaleTimeString(),
       timestamp: (new Date()).toISOString(),
-      sourceLink: source && `[${source.path}:${line}](${source.path}:${line})`,
-      dueEmoji: (() => {
-        const due = totals["What's Due?"]
-        let emoji = ':2nd_place_medal:'
-        if (due >= 3) {
-          emoji = ':fire:'
-        } else if (due === 0) {
-          emoji = ':rocket:'
-        }
-        return `<span style="font-size: 1.5em;">${emoji}</span>`
-      })(),
-      recentEmoji: (() => {
-        const recentlyCompleted = totals["Recently Completed"]
-        let emoji = ':2nd_place_medal:'
-        if (recentlyCompleted >= 3) {
-          emoji = ':rocket:'
-        } else if (recentlyCompleted === 0) {
-          emoji = ':fire:'
-        }
-        return `<span style="font-size: 1.5em;">${emoji}</span>`
-      })(),
-      wipEmoji: (() => {
-        const doing = totals["DOING"]
-        let emoji = ':2nd_place_medal:'
-        if (doing >= 3) {
-          emoji = ':fire:'
-        } else if (doing === 0) {
-          emoji = ':sleeping:'
-        } else if (doing === 1) {
-          emoji = ':rocket:'
-        }
-        return `<span style="font-size: 1.5em;">${emoji}</span>`
-      })(),
-      cardTotal: (() => {
-        let count = 0
-        Object.keys(totals).forEach(list => {
-          count += totals[list]
-        })
-        return count
-      })()
+      sourceLink: source && `[${source.path}:${line}](${source.path}:${line})`
     }
   }
 }
