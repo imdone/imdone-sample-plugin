@@ -9,7 +9,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "imdone-api": "^0.0.11"
+    "imdone-api": "^0.0.12"
   },
   "devDependencies": {
     "rollup": "^2.62.0"
