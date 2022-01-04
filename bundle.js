@@ -48,7 +48,7 @@ class SamplePlugin extends Plugin__default["default"] {
     ]
   }
 
-  getCardLinks (task) {
+  getCardActions (task) {
     this.project;
     return [
       {

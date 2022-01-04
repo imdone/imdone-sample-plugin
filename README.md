@@ -22,8 +22,8 @@ Implemented in the `getBoardActions` method
 | Test snackBar           | Show a snackbar message             |
 | Test toast              | Show a toast message                |
 
-### Card Links
-Implemented in the `getCardLinks` method
+### Card Actions
+Implemented in the `getCardActions` method
 | Title                 | Description                                   |
 |-----------------------|-----------------------------------------------|
 | Write task to console | Write the active task to the devtools console |

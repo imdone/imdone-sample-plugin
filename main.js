@@ -42,7 +42,7 @@ export default class SamplePlugin extends Plugin {
     ]
   }
 
-  getCardLinks (task) {
+  getCardActions (task) {
     const project = this.project
     return [
       {
