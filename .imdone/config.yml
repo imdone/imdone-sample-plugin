@@ -14,27 +14,30 @@ code:
     - NOTE
     - REVIEW
 lists:
-  - filter: 'dueDate < "${tomorrow at 6AM}" AND list != DONE +dueDate +order'
+  - name: What's Due?
     hidden: true
-    id: 0
-    name: What's Due?
-  - hidden: false
     ignore: false
-    name: NOTE
-  - hidden: false
-    name: TODO
-  - hidden: false
-    name: DOING
-  - hidden: false
-    ignore: true
-    name: DONE
-  - filter: 'completedDate > "${7 days ago}" -completed'
+    filter: 'dueDate < "${tomorrow at 6AM}" AND list != DONE +dueDate +order'
+    id: 0
+  - name: NOTE
     hidden: false
+    ignore: false
+  - name: TODO
+    hidden: false
+    ignore: false
+  - name: DOING
+    hidden: false
+    ignore: false
+  - name: DONE
+    hidden: false
+    ignore: true
+  - name: Recently Completed
+    hidden: false
+    ignore: false
+    filter: 'completedDate > "${7 days ago}" -completed'
     id: 1
-    name: Recently Completed
 settings:
   openIn: code
-  customOpenIn: ''
   editorTheme: blackboard
   journalType: Single File
   journalPath: null
@@ -43,6 +46,16 @@ settings:
   replaceSpacesWith: '-'
   plugins:
     devMode: false
+    imdone-sample-plugin:
+      tags:
+        - name: four
+        - name: one
+        - name: three
+      meta:
+        - key: epic
+          value: Release 1.25
+        - key: epic
+          value: Release 1.26
   filteredLists:
     - filter: 'dueDate < "${tomorrow at 6AM}" AND list != DONE +dueDate +order'
       name: What's Due?
@@ -61,12 +74,7 @@ settings:
       <!--
       created:${(new Date()).toISOString()}
       -->
-    links:
-      - href: >-
-          https://twitter.com/intent/tweet?text=${encodedText}%0ATweeted%20with%20@imdoneio
-        icon: twitter
-        pack: fab
-        title: Tweet this card
+    links: null
     trackChanges: false
     metaNewLine: false
     addCompletedMeta: true
