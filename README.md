@@ -24,13 +24,13 @@ Implemented in the `getBoardActions` method
 
 ### Card Actions
 Implemented in the `getCardActions` method
-| Title                 | Description                                   |
-|-----------------------|-----------------------------------------------|
-| Write task to console | Write the active task to the devtools console |
-| Add metadata:value    | Add **metadata:value** to card                |
-| Add urgent tag        | Add an **urgent** tag to card                 |
-| Copy markdown         | Copy card markdown to clipboard               |
-| Copy Html             | Copy card html to clipboard                   |
+| Title                 | Description                                                    |
+|-----------------------|----------------------------------------------------------------|
+| Write task to console | Write the active task to the devtools console                  |
+| Add metadata:value    | Add **metadata:value** to card based on key, value in settings |
+| Add a tag             | Add a tag to card based on tags in settings                    |
+| Copy markdown         | Copy card markdown to clipboard                                |
+| Copy Html             | Copy card html to clipboard                                    |
 
 ### Card Properties
 Implemented in `getCardProperties` method

@@ -38,6 +38,7 @@ lists:
     id: 1
 settings:
   openIn: code
+  customOpenIn: ''
   editorTheme: blackboard
   journalType: Single File
   journalPath: null

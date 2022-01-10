@@ -97,7 +97,7 @@ class SamplePlugin extends Plugin__default["default"] {
           },
           icon: 'table',
           pack: 'fas',
-          title: `Add metadata ${key}=${value}`
+          title: `Add metadata ${key} = ${value}`
         }      
       })
   }
