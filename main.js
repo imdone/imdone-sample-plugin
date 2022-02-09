@@ -33,7 +33,7 @@ export default class SamplePlugin extends Plugin {
       {
         name: 'Filter for urgent cards',
         action: () => {
-          project.setFilter('allTags=urget')
+          project.setFilter('allTags = urgent')
         }
       },
       {
