@@ -1,125 +1,135 @@
 import Plugin from 'imdone-api'
-import {Settings, ArrayProperty, StringProperty} from 'imdone-api/lib/settings'
+import {
+  Settings,
+  ArrayProperty,
+  StringProperty,
+} from 'imdone-api/lib/settings'
 
 export default class SamplePlugin extends Plugin {
-  
-  constructor (project) {
+  constructor(project) {
     super(project)
   }
-  
-  onTaskUpdate (task) {
-    task.interpretedContent = task.interpretedContent.replace(/- \[x\] (.*)$/gm, (match, p1) => {
-      return `- [x] ~~${p1}~~`
-    })
+
+  onTaskUpdate(task) {
+    task.interpretedContent = task.interpretedContent.replace(
+      /- \[x\] (.*)$/gm,
+      (match, p1) => {
+        return `- [x] ~~${p1}~~`
+      }
+    )
   }
 
-  getCardProperties (task) {
-    const {
-      source,
-      line,
-      totals
-    } = task
+  getCardProperties(task) {
+    const { source, line, totals } = task
     return {
-      date: (new Date()).toDateString(),
-      time: (new Date()).toLocaleTimeString(),
-      timestamp: (new Date()).toISOString(),
-      sourceLink: source && `[${source.path}:${line}](${source.path}:${line})`
+      date: new Date().toDateString(),
+      time: new Date().toLocaleTimeString(),
+      timestamp: new Date().toISOString(),
+      sourceLink: source && `[${source.path}:${line}](${source.path}:${line})`,
     }
   }
 
-  getBoardActions () {
+  getBoardActions() {
     const project = this.project
     return [
       {
         name: 'Filter for urgent cards',
         action: () => {
           project.setFilter('allTags = urgent')
-        }
+        },
       },
       {
         name: 'Add a card in TODO',
         action: () => {
-          project.newCard({ list: 'TODO'})
-        }
+          project.newCard({ list: 'TODO' })
+        },
       },
       {
         name: 'Test snackBar',
         action: () => {
-          project.snackBar({message:'Testing snackBar'})
-        }
+          project.snackBar({ message: 'Testing snackBar' })
+        },
       },
       {
         name: 'Test toast',
         action: () => {
-          project.toast({message:'Testing toast'})
-        }
-      }
+          project.toast({ message: 'Testing toast' })
+        },
+      },
     ]
   }
 
-  getCardActions (task) {
+  getCardActions(task) {
     return [
       ...this.getTagActions(task),
       ...this.getMetaActions(task),
       {
         action: () => {
-          this.project.copyToClipboard(task.data.rawMarkdown, "Markdown copied to clipboard!")
+          this.project.copyToClipboard(
+            task.desc.rawMarkdown,
+            'Markdown copied to clipboard!'
+          )
         },
         icon: 'markdown',
         pack: 'fab',
-        title: 'Copy markdown'
+        title: 'Copy markdown',
       },
       {
         action: () => {
-          this.project.copyToClipboard(task.data.html, "HTML copied to clipboard!")
+          this.project.copyToClipboard(
+            task.desc.html,
+            'HTML copied to clipboard!'
+          )
         },
         icon: 'copy',
         pack: 'fas',
-        title: 'Copy html'
-      }
-
+        title: 'Copy html',
+      },
     ]
   }
 
-  getMetaActions (task) {
+  getMetaActions(task) {
     return this.getMeta()
-      .filter(({key, value}) => !(task.allMeta[key] && task.allMeta[key].includes(value)))
-      .map(({key, value}) => {
+      .filter(
+        ({ key, value }) =>
+          !(task.allMeta[key] && task.allMeta[key].includes(value))
+      )
+      .map(({ key, value }) => {
         return {
           action: () => {
             this.project.addMetadata(task, key, value)
           },
           icon: 'table',
           pack: 'fas',
-          title: `Add metadata ${key} = ${value}`
-        }      
+          title: `Add metadata ${key} = ${value}`,
+        }
       })
   }
 
-  getTagActions (task) {
+  getTagActions(task) {
     return this.getTags()
-      .filter(({name}) => !task.allTags.includes(name))
-      .map(({name}) => {
+      .filter(({ name }) => !task.allTags.includes(name))
+      .map(({ name }) => {
         return {
           action: () => {
             this.project.addTag(task, name)
           },
           icon: 'tag',
           pack: 'fas',
-          title: `Add ${name} tag`
-        }      
+          title: `Add ${name} tag`,
+        }
       })
   }
 
-  getTags () {
+  getTags() {
     return this.getSettings().tags || []
   }
 
-  getMeta () {
+  getMeta() {
     return this.getSettings().meta || []
   }
 
-  getSettingsSchema () {
+  getSettingsSchema() {
     if (!this.settingSchema) {
       this.settingSchema = new Settings()
         .addProperty(
