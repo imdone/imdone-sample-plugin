@@ -130,28 +130,29 @@ export default class SamplePlugin extends Plugin {
   }
 
   getSettingsSchema() {
-    if (!this.settingSchema) {
-      this.settingSchema = new Settings()
-        .addProperty(
-          'tags',
-          new ArrayProperty()
-            .itemsDraggable(true)
-            .setTitle('Tags')
-            .setDescription('Quick add tags from card menu.')
-            .itemTitle('Tag')
-            .addItemProperty('name', new StringProperty().setTitle('Name'))
-        )
-        .addProperty(
-          'meta',
-          new ArrayProperty()
-            .itemsDraggable(true)
-            .setTitle('Metadata')
-            .setDescription('Quick set metadata from card menu.')
-            .itemTitle('Key, value pair')
-            .addItemProperty('key', new StringProperty().setTitle('Key'))
-            .addItemProperty('value', new StringProperty().setTitle('Value'))
-        )
-    }
-    return this.settingSchema
+    if (this.settingSchema) return this.settingSchema
+
+    this.settingSchema = new Settings()
+      .addProperty(
+        'tags',
+        new ArrayProperty()
+          .itemsDraggable(true)
+          .setTitle('Tags')
+          .setDescription('Quick add tags from card menu.')
+          .itemTitle('Tag')
+          .addItemProperty('name', new StringProperty().setTitle('Name'))
+      )
+      .addProperty(
+        'meta',
+        new ArrayProperty()
+          .itemsDraggable(true)
+          .setTitle('Metadata')
+          .setDescription('Quick set metadata from card menu.')
+          .itemTitle('Key, value pair')
+          .addItemProperty('key', new StringProperty().setTitle('Key'))
+          .addItemProperty('value', new StringProperty().setTitle('Value'))
+      )
+
+      return this.settingSchema
   }
 }
